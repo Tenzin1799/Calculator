@@ -75,7 +75,7 @@ public class Calculator implements ActionListener {
                 operator.push("+");
                 equal.setEnabled(true);
             } else {
-                plusEquals();
+                operatorEquals("+");
             }
         } else if (((JButton)e.getSource()).getText().equals("-")){
             if(op1 == 0) {
@@ -84,7 +84,7 @@ public class Calculator implements ActionListener {
                 operator.push("-");
                 equal.setEnabled(true);
             } else {
-                minusEquals();
+                operatorEquals("-");
             }
         } else if (((JButton)e.getSource()).getText().equals("=")){
             equals();
@@ -115,7 +115,7 @@ public class Calculator implements ActionListener {
         digits = 0;
     }
 
-    public void plusEquals(){
+    public void operatorEquals(String opType){
         op2 = digits;
         if(operator.peek().equals("+")){
             op1 = op1 + op2;
@@ -128,23 +128,11 @@ public class Calculator implements ActionListener {
         }
         result.setText(String.valueOf(op1));
         digits = 0;
-        operator.push("+");
-    }
-
-    public void minusEquals(){
-        op2 = digits;
-        if(operator.peek().equals("+")){
-            op1 = op1 + op2;
-            result.setText(String.valueOf(op1));
-            operator.pop();
-        } else if(operator.peek().equals("-")){
-            op1 = op1 - op2;
-            result.setText(String.valueOf(op1));
-            operator.pop();
+        if(opType.equals("+")){
+            operator.push("+");
+        } else if (opType.equals("-")){
+            operator.push("-");
         }
-        result.setText(String.valueOf(op1));
-        digits = 0;
-        operator.push("-");
     }
 
     public void clearCalculator(){
