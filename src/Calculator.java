@@ -20,7 +20,7 @@ public class Calculator implements ActionListener {
     private final JButton plus = new JButton("+");
     private final JButton minus = new JButton("-");
     private final JButton clear = new JButton("CE");
-    private final JButton[] buttonArray = {clear, zero, one, two, three, four, five, six, seven, eight, nine, plus, minus, equal};
+    private final JButton[] buttonArray = {seven, eight, nine, four, five, six, one, two, three, clear, zero, equal, plus, minus};
     private int op1 = 0;
     private int op2 = 0;
     private int digits = 0;
@@ -41,21 +41,20 @@ public class Calculator implements ActionListener {
     }
 
     private void setUpGUI(){
+        final int row1 = 50, row2 = 100, row3 = 150, row4 = 200;
+        final int rows[] = {row1, row2, row3, row4};
+        final int col1 = 75, col2 = 125, col3 = 175, col4 = 225;
+        final int cols[] = {col1, col2, col3, col4};
+        final int digitWidth = 50, digitHeight = 50, operatorWidth = 30, operatorHeight = 50;
+        int counter = 0;
+        for (int i = 0; i < 4; i++){    // row
+            for(int j = 0; j < 3; j++){ // col
+                    buttonArray[counter++].setBounds(cols[j], rows[i], digitWidth, digitHeight);
+            }
+        }
         result.setBounds(50, 0, 200, 50);
-        one.setBounds(75, 150, 50, 50);
-        two.setBounds(125, 150, 50, 50);
-        three.setBounds(175, 150, 50, 50);
-        four.setBounds(75, 100, 50, 50);
-        five.setBounds(125, 100, 50, 50);
-        six.setBounds(175, 100, 50, 50);
-        seven.setBounds(75, 50, 50, 50);
-        eight.setBounds(125, 50, 50, 50);
-        nine.setBounds(175, 50, 50, 50);
-        zero.setBounds(125, 200, 50, 50);
-        equal.setBounds(175, 200, 50, 50);
-        plus.setBounds(225, 200, 30, 50);
-        minus.setBounds(225, 150, 30, 50);
-        clear.setBounds(75, 200, 50, 50);
+        plus.setBounds(col4, row4, operatorWidth, operatorHeight);
+        minus.setBounds(col4, row3, operatorWidth, operatorHeight);
         equal.setEnabled(false);
         plus.setEnabled(false);
         minus.setEnabled(false);
@@ -67,7 +66,6 @@ public class Calculator implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e){
-        //System.out.println(((JButton)e.getSource()).getText());
         if(((JButton)e.getSource()).getText().equals("+")){
             if(op1 == 0) {
                 op1 = digits;
